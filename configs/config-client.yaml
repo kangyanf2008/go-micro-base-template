@@ -1,0 +1,9 @@
+server:
+  serviceName:
+    gateway
+
+registrar:
+  zookeeper:
+    addr: ["localhost:2181"]
+    namespace: "microservices"
+    sessionTimeout: 15

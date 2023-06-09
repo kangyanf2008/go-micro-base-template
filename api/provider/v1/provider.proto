@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package provider.v1;
+
+import "google/protobuf/any.proto";
+import "api/provider/v1/event.proto";
+import "api/provider/v1/error_reason.proto";
+
+option go_package = "api/provider/v1;v1";
+option java_multiple_files = true;
+
+/**
+命令
+ protoc --go_out=. --micro_out=. api/provider/v1/provider.proto
+ */
+
+// The base service definition.
+service Provider {
+  // Sends a greeting
+  rpc BaserService (Request) returns (Response) {}
+}
+
+// The request message containing the user's name.
+message Request {
+  string      reqId        =  1;                      //请求ID
+  EVENT_CODE  event        =  2;                      //消息类型
+  google.protobuf.Any body =  3;                      //消息体
+}
+
+// The response message containing the greetings
+message Response {
+  string      reqId        = 1;                       //请求ID
+  EVENT_CODE  event        = 2;                       //消息类型
+  ErrorReason code         = 3;                       //错误码
+  string      desc         = 4;                       //描述
+  google.protobuf.Any body = 5;                       //消息体
+}
